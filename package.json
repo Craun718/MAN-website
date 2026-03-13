@@ -10,13 +10,13 @@
     "preview": "rspress preview"
   },
   "dependencies": {
-    "rspress": "^1.40.2",
+    "rspress": "^1.47.1",
     "rspress-plugin-reading-time": "^0.3.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@rspress/plugin-last-updated": "^1.47.0",
-    "@types/node": "^18.11.17",
+    "@rspress/plugin-last-updated": "^1.47.1",
+    "@types/node": "^18.19.130",
     "rspress-plugin-align-image": "^0.3.0",
     "rspress-plugin-toc": "^0.3.0"
   },
