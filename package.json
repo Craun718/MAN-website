@@ -10,14 +10,14 @@
     "preview": "rspress preview"
   },
   "dependencies": {
-    "rspress": "^1.47.1",
-    "rspress-plugin-reading-time": "^0.3.0"
+    "@rspress/core": "^2.0.10",
+    "rspress-plugin-reading-time": "^1.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@rspress/plugin-last-updated": "^1.47.1",
-    "@types/node": "^18.19.130",
-    "rspress-plugin-align-image": "^0.3.0",
+    "@rsbuild/plugin-less": "^1.6.3",
+    "@types/node": "^20.19.40",
+    "rspress-plugin-align-image": "^1.0.0",
     "rspress-plugin-toc": "^0.3.0"
   },
   "packageManager": "pnpm@10.26.1+sha512.664074abc367d2c9324fdc18037097ce0a8f126034160f709928e9e9f95d98714347044e5c3164d65bd5da6c59c6be362b107546292a8eecb7999196e5ce58fa"
