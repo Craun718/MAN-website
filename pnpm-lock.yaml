@@ -21,6 +21,9 @@ importers:
       '@rsbuild/plugin-less':
         specifier: ^1.6.3
         version: 1.6.3(@rsbuild/core@2.0.5(core-js@3.42.0))(@rspack/core@2.0.2(@swc/helpers@0.5.21))(webpack@5.104.1)
+      '@rspress/plugin-sitemap':
+        specifier: ^2.0.10
+        version: 2.0.10(@rspress/core@2.0.10(@rspack/core@2.0.2(@swc/helpers@0.5.21))(@types/mdast@4.0.4)(@types/react@19.2.14)(core-js@3.42.0)(micromark-util-types@2.0.2)(micromark@4.0.2))
       '@types/node':
         specifier: ^20.19.40
         version: 20.19.40
@@ -667,6 +670,12 @@ packages:
     engines: {node: '>=14.17.6'}
     peerDependencies:
       '@rspress/runtime': ^1.47.1
+
+  '@rspress/plugin-sitemap@2.0.10':
+    resolution: {integrity: sha512-PZLig9+OlnyLcy6x9BlEqWSRef6TzDWB6Dlh2/hY41FtKlhyb7d7U56RGlLselWaQV54SHVa6H/y611A56ZI2g==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    peerDependencies:
+      '@rspress/core': ^2.0.10
 
   '@rspress/runtime@1.47.1':
     resolution: {integrity: sha512-deEyM6wTr9G/Gq2LPPY2xJmW0wMPvtemTgXHcjd6VraQ3ikKGNEkZSofpwLOUfwsrHmOXEGHHQw5oFkaZb9ALw==}
@@ -3501,6 +3510,10 @@ snapshots:
     dependencies:
       '@rspress/runtime': 1.47.1
       medium-zoom: 1.1.0
+
+  '@rspress/plugin-sitemap@2.0.10(@rspress/core@2.0.10(@rspack/core@2.0.2(@swc/helpers@0.5.21))(@types/mdast@4.0.4)(@types/react@19.2.14)(core-js@3.42.0)(micromark-util-types@2.0.2)(micromark@4.0.2))':
+    dependencies:
+      '@rspress/core': 2.0.10(@rspack/core@2.0.2(@swc/helpers@0.5.21))(@types/mdast@4.0.4)(@types/react@19.2.14)(core-js@3.42.0)(micromark-util-types@2.0.2)(micromark@4.0.2)
 
   '@rspress/runtime@1.47.1':
     dependencies:
