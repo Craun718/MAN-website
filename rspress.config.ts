@@ -1,5 +1,7 @@
 import * as path from 'node:path';
-import {defineConfig} from 'rspress/config';
+import { defineConfig } from '@rspress/core';
+import { pluginLess } from '@rsbuild/plugin-less';
+import { pluginSitemap } from '@rspress/plugin-sitemap';
 import alignImage from 'rspress-plugin-align-image';
 import readingTime from 'rspress-plugin-reading-time';
 import toc from 'rspress-plugin-toc';
@@ -8,9 +10,11 @@ export default defineConfig({
     root: path.join(__dirname, 'docs'),
     title: 'Maa Auto Naruto',
     icon: '/logo.ico',
-    plugins: [alignImage(), readingTime({
+    plugins: [alignImage(), toc(), readingTime({
         defaultLocale: 'zh-CN',
-    }), toc()],
+    }), pluginSitemap({
+        siteUrl: 'https://naruto.natsuu.top',
+    })],
     logo: {
         light: '/nav-logo-light.png',
         dark: '/nav-logo-dark.png',
@@ -27,9 +31,8 @@ export default defineConfig({
         enableContentAnimation: true, // 是否启用内容动画
         enableAppearanceAnimation: true, // 是否启用外观动画
         lastUpdated: true, // 是否启用页面更新时间
-        lastUpdatedText: '上次更新时间',
-        searchPlaceholderText: '搜索',
-        searchNoResultsText: '没有找到搜索结果',
-        searchSuggestedQueryText: '请使用不同的关键词重试',
+    },
+    builderConfig: {
+        plugins: [pluginLess()],
     },
 });
