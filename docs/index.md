@@ -1,5 +1,30 @@
 ---
 pageType: home
+title: Maa Auto Naruto
+titleSuffix: 火影忍者手游自动化工具
+description: MaaAutoNaruto（MAN）是基于图像识别的火影忍者手游自动化助手，由 MaaFramework 驱动，支持日常任务、副本挑战和活动任务。
+head:
+  - - meta
+    - property: og:type
+      content: website
+  - - meta
+    - property: og:site_name
+      content: Maa Auto Naruto
+  - - meta
+    - property: og:title
+      content: Maa Auto Naruto - 火影忍者手游自动化工具
+  - - meta
+    - property: og:description
+      content: MaaAutoNaruto（MAN）是基于图像识别的火影忍者手游自动化助手，由 MaaFramework 驱动，支持日常任务、副本挑战和活动任务。
+  - - meta
+    - property: og:url
+      content: https://naruto.natsuu.top/
+  - - meta
+    - property: og:image
+      content: https://naruto.natsuu.top/logo.png
+  - - meta
+    - name: twitter:card
+      content: summary
 
 hero:
   name: MaaAutoNaruto
