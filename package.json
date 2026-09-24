@@ -17,7 +17,7 @@
     "@biomejs/biome": "^2.5.14",
     "@rsbuild/plugin-less": "^2.0.1",
     "@rspress/plugin-sitemap": "^2.0.21",
-    "@types/node": "^22.20.3",
+    "@types/node": "^26.6.2",
     "rspress-plugin-align-image": "^1.0.0"
   },
   "packageManager": "pnpm@10.26.1+sha512.664074abc367d2c9324fdc18037097ce0a8f126034160f709928e9e9f95d98714347044e5c3164d65bd5da6c59c6be362b107546292a8eecb7999196e5ce58fa"
