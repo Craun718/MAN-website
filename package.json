@@ -16,7 +16,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",
     "@rsbuild/plugin-less": "^2.0.1",
-    "@rspress/plugin-sitemap": "^2.0.21",
+    "@rspress/plugin-sitemap": "^2.0.23",
     "@types/node": "^22.20.3",
     "rspress-plugin-align-image": "^1.0.0"
   },
