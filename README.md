@@ -29,3 +29,15 @@ Preview the production build locally:
 ```bash
 pnpm run preview
 ```
+
+## Sync documentation
+
+Sync the latest documentation from `duorua/narutomobile`:
+
+```bash
+pnpm run sync:docs
+```
+
+The `Sync MAN docs` GitHub Actions workflow runs this command every day at
+02:10 UTC (10:10 Asia/Shanghai), commits changes to the repository, and
+triggers the Pages deployment.

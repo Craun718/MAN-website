@@ -8,7 +8,8 @@
     "check": "biome check --write",
     "dev": "rspress dev",
     "format": "biome format --write",
-    "preview": "rspress preview"
+    "preview": "rspress preview",
+    "sync:docs": "node scripts/sync-docs.mjs"
   },
   "dependencies": {
     "@rspress/core": "^2.0.21"

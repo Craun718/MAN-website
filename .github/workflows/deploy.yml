@@ -10,8 +10,6 @@ on:
   push:
     branches:
       - main
-  schedule:
-    - cron: '10 5 * * *'
 
 # 添加权限配置
 permissions:
@@ -32,18 +30,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Checkout MAN repository
-        uses: actions/checkout@v4
-        with:
-          repository: duorua/narutomobile
-          path: temp
-
-      - name: Sync docs from MAN
-        run: |
-          # 同步根 README
-          # cp temp/docs/README.md docs/README.md || true
-          rsync -av temp/docs/ docs/ || true
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4

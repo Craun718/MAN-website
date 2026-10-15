@@ -2,7 +2,6 @@ name: Build test
 
 on:
   # 当仓库文档更新时触发
-  # Triggered when M9A repository docs are updated
   repository_dispatch:
     types: [md_changes]
   # 手动触发部署
@@ -37,21 +36,6 @@ jobs:
         with:
           fetch-depth: 0
 
-    #   - name: Checkout M9A repository
-    #     uses: actions/checkout@v4
-    #     with:
-    #       repository: MAA1999/M9A
-    #       path: M9A-temp
-
-    #   - name: Sync docs from M9A
-    #     run: |
-    #       # 同步根 README
-    #       cp M9A-temp/docs/README.md docs/README.md || true
-    #       # 同步中文文档
-    #       rsync -av --delete M9A-temp/docs/zh_cn/ docs/zh_cn/ || true
-    #       # 同步英文文档
-    #       rsync -av --delete M9A-temp/docs/en_us/ docs/en_us/ || true
-
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
 
@@ -69,4 +53,3 @@ jobs:
 
       - name: Build with Rspress
         run: pnpm run build
-

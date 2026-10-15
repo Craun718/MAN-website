@@ -1,0 +1,57 @@
+name: Sync MAN docs
+
+on:
+  schedule:
+    # GitHub Actions cron uses UTC. 02:10 UTC is 10:10 in Asia/Shanghai.
+    - cron: '10 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-docs
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Sync docs from MAN
+        run: pnpm run sync:docs
+
+      - name: Commit changes and trigger deployment
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          git add docs
+
+          if git diff --cached --quiet; then
+            echo "Documentation is already up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "docs: sync latest MAN documentation"
+          git push origin HEAD:main
+
+          gh api \
+            --method POST \
+            "repos/${GH_REPO}/dispatches" \
+            -f event_type=md_changes
