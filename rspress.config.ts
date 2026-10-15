@@ -6,6 +6,7 @@ import alignImage from 'rspress-plugin-align-image';
 
 export default defineConfig({
   root: path.join(__dirname, 'docs'),
+  lang: 'zh',
   title: 'Maa Auto Naruto',
   icon: '/logo.ico',
   plugins: [
