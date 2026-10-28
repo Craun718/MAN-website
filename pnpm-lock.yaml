@@ -11,6 +11,12 @@ importers:
       '@rspress/core':
         specifier: ^2.0.23
         version: 2.0.23(@rspack/core@2.2.9(@swc/helpers@0.5.23))(core-js@3.42.0)(micromark-util-types@2.0.2)(micromark@4.0.2)
+      react:
+        specifier: ^19.3.0
+        version: 19.3.0
+      react-dom:
+        specifier: ^19.3.0
+        version: 19.3.0(react@19.3.0)
     devDependencies:
       '@biomejs/biome':
         specifier: ^2.5.15
@@ -24,6 +30,9 @@ importers:
       '@types/node':
         specifier: ^26.6.5
         version: 26.6.5
+      '@types/react':
+        specifier: ^19.3.0
+        version: 19.3.0
       rspress-plugin-align-image:
         specifier: ^1.0.0
         version: 1.0.0(@rspress/core@2.0.23(@rspack/core@2.2.9(@swc/helpers@0.5.23))(core-js@3.42.0)(micromark-util-types@2.0.2)(micromark@4.0.2))
