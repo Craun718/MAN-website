@@ -17,7 +17,7 @@
     "react-dom": "^19.3.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.15",
+    "@biomejs/biome": "^2.6.3",
     "@rsbuild/plugin-less": "^2.0.1",
     "@rspress/plugin-sitemap": "^2.0.23",
     "@types/node": "^26.6.5",
