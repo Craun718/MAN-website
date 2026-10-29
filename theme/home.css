@@ -13,7 +13,7 @@
 .man-home-label { color: var(--rp-c-brand); font-size: 14px; font-weight: 700; }
 .man-home-split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
 .man-home-split-reverse > :first-child { order: 2; }
-.man-home-image, .man-home-example, .man-home-card { border: 1px solid var(--rp-c-divider); border-radius: 16px; background: var(--rp-c-bg-soft); }
+.man-home-image, .man-home-card { border: 1px solid var(--rp-c-divider); border-radius: 16px; background: var(--rp-c-bg-soft); }
 .man-home-image { overflow: hidden; padding: 16px; }
 .man-home-image img { display: block; width: 100%; height: auto; border-radius: 8px; }
 .man-home-platforms { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px; }
@@ -22,12 +22,6 @@
 .man-home-card h3 { margin: 16px 0 8px; font-size: 18px; }
 .man-home-card p { margin: 0; font-size: 14px; }
 .man-home-card .man-home-platform-highlight { color: var(--rp-c-brand); font-weight: 700; }
-.man-home-example { padding: 28px; color: var(--rp-c-brand); }
-.man-home-example > div { padding: 12px 0; }
-.man-home-example > div + div { border-top: 1px solid var(--rp-c-divider); }
-.man-home-example span { margin-left: 10px; color: var(--rp-c-text-1); }
-.man-home-example-title { color: var(--rp-c-text-1); font-weight: 700; }
-.man-home-example-title span { float: right; color: var(--rp-c-text-2); font-size: 13px; font-weight: 400; }
 .man-home-community { text-align: center; }
 .man-home-community p { margin: 0 auto; }
 .man-home-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 24px; }
