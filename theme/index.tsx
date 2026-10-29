@@ -5,10 +5,11 @@ import './home.css';
 export * from '@rspress/core/theme-original';
 
 // 首页扩展内容：直接修改下面的标题、文字、链接和图片即可。
-const steps = [
-  { number: '01', title: '下载并解压', description: '下载最新版本，将文件解压到单独的文件夹。' },
-  { number: '02', title: '连接模拟器', description: '启动模拟器，按照指引完成设备连接和配置。' },
-  { number: '03', title: '开始任务', description: '选择需要执行的任务，点击开始即可。' },
+const platforms = [
+  { name: 'Windows', description: '模拟器版' },
+  { name: 'macOS', description: '模拟器版' },
+  { name: 'Linux', description: '模拟器版' },
+  { name: 'Android', description: '实机独立运行' },
 ];
 
 function HomeSections() {
@@ -17,8 +18,8 @@ function HomeSections() {
       <section className="man-home-section man-home-split">
         <div>
           <span className="man-home-label">界面展示</span>
-          <h2>熟悉的任务，一目了然</h2>
-          <p>在这里介绍软件界面、任务配置和你希望展示的特色功能。</p>
+          <h2>运行状态，一目了然</h2>
+          <p>任务进度和运行状况实时展示。</p>
           <a href="/guide/">了解如何使用 →</a>
         </div>
         {/* 将 src 替换为你的软件截图，例如 /screenshots/home.png。 */}
@@ -26,15 +27,16 @@ function HomeSections() {
       </section>
 
       <section className="man-home-section">
-        <span className="man-home-label">快速上手</span>
-        <h2>简单几步，开始使用</h2>
-        <p>从下载到运行，按照指引完成配置。</p>
-        <div className="man-home-steps">
-          {steps.map((step) => (
-            <div className="man-home-card" key={step.number}>
-              <span>{step.number}</span>
-              <h3>{step.title}</h3>
-              <p>{step.description}</p>
+        <span className="man-home-label">跨平台支持</span>
+        <h2>在你喜欢的平台上使用</h2>
+        <p>支持 Windows、macOS、Linux 和 Android。</p>
+        <div className="man-home-platforms">
+          {platforms.map((platform) => (
+            <div className="man-home-card" key={platform.name}>
+              <h3>{platform.name}</h3>
+              <p className={platform.name === 'Android' ? 'man-home-platform-highlight' : undefined}>
+                {platform.description}
+              </p>
             </div>
           ))}
         </div>

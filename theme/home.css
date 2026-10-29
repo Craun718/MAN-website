@@ -16,11 +16,12 @@
 .man-home-image, .man-home-example, .man-home-card { border: 1px solid var(--rp-c-divider); border-radius: 16px; background: var(--rp-c-bg-soft); }
 .man-home-image { overflow: hidden; padding: 16px; }
 .man-home-image img { display: block; width: 100%; height: auto; border-radius: 8px; }
-.man-home-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+.man-home-platforms { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px; }
 .man-home-card { padding: 24px; }
 .man-home-card > span { color: var(--rp-c-brand); font-size: 14px; font-weight: 700; }
 .man-home-card h3 { margin: 16px 0 8px; font-size: 18px; }
 .man-home-card p { margin: 0; font-size: 14px; }
+.man-home-card .man-home-platform-highlight { color: var(--rp-c-brand); font-weight: 700; }
 .man-home-example { padding: 28px; color: var(--rp-c-brand); }
 .man-home-example > div { padding: 12px 0; }
 .man-home-example > div + div { border-top: 1px solid var(--rp-c-divider); }
@@ -33,7 +34,8 @@
 @media (max-width: 767px) {
   .man-home-sections { padding: 0 24px 48px; }
   .man-home-section { padding: 56px 0; }
-  .man-home-split, .man-home-steps { grid-template-columns: 1fr; }
+  .man-home-split { grid-template-columns: 1fr; }
+  .man-home-platforms { grid-template-columns: repeat(2, 1fr); }
   .man-home-split { gap: 28px; }
   .man-home-split-reverse > :first-child { order: 0; }
 }
