@@ -42,21 +42,21 @@ hero:
     alt: Logo
 features:
   - title: 图像识别
-    details: 基于OpenCV和PaddleOCR精准识别游戏界面元素，实现稳定可靠的自动化操作。
+    details: 基于 OpenCV 和 PaddleOCR 精准识别界面元素，不修改游戏自身数据。
     icon: 🎯
   - title: 日常任务
     details: 支持刷体力、组织祈福、每日招财、生存挑战等日常任务的自动化执行。
     icon: 📋
   - title: 生态定位
-    details: 基于MaaFrame开发，背靠一流维护团队，持续提供高效、稳定的服务。
+    details: 使用 MaaFrame 开发，背靠一流维护团队，持续提供高效、稳定的服务。
     icon: ✨
   - title: 副本挑战
-    details: 可自动完成刷周胜，秘境副本等战斗内容正在持续优化中。
+    details: 可自动完成刷周胜、秘境副本等战斗内容，实现脱手领鸡蛋。
     icon: ⚔️
   - title: 活动支持
-    details: 支持情报社等各种蚊子腿的自动化操作。
+    details: 实现情报社等各种蚊子腿的自动化领取，不要小看MAN的情报网。
     icon: 🎪
   - title: 易于使用
-    details: 提供简洁直观的用户界面，只需简单配置即可开始使用。
+    details: 用户界面简洁直观，只需简单配置即可开始使用。
     icon: 🎮
 ---
