@@ -30,13 +30,6 @@ hero:
   name: MaaAutoNaruto
   text: 火影手游自动化工具
   tagline: 由 MaaFrame 强力驱动！
-  actions:
-    - theme: brand
-      text: 快速开始
-      link: /guide/
-    - theme: alt
-      text: GitHub
-      link: https://github.com/duorua/narutomobile
   image:
     src: /logo.png
     alt: Logo

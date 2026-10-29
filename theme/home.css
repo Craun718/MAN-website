@@ -39,3 +39,29 @@
   .man-home-split { gap: 28px; }
   .man-home-split-reverse > :first-child { order: 0; }
 }
+
+.man-hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+.man-download-split { display: flex; position: relative; border-radius: var(--rp-radius-large); background: var(--rp-home-hero-title-bg); color: white; }
+.man-download-primary { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 20px; color: white; font-size: 16px; font-weight: 700; white-space: nowrap; }
+.man-download-primary:hover { color: white; opacity: .85; }
+.man-download-icon { width: 18px; height: 18px; flex: none; }
+.man-download-primary small { font-size: 12px; opacity: .8; }
+.man-download-dropdown { border-left: 1px solid rgba(255, 255, 255, .35); }
+.man-download-dropdown summary { display: flex; width: 48px; height: 100%; min-height: 48px; align-items: center; justify-content: center; cursor: pointer; list-style: none; font-size: 24px; line-height: 1; }
+.man-download-dropdown summary::-webkit-details-marker { display: none; }
+.man-download-dropdown summary svg { display: block; width: 18px; height: 18px; }
+.man-download-dropdown[open] summary svg { transform: rotate(180deg); }
+.man-download-menu { position: absolute; z-index: 10; top: calc(100% + 8px); left: 0; width: min(320px, calc(100vw - 48px)); padding: 8px; border: 1px solid var(--rp-c-divider); border-radius: 10px; background: var(--rp-c-bg); box-shadow: 0 12px 32px rgba(0, 0, 0, .18); color: var(--rp-c-text-1); }
+.man-download-menu-title { padding: 10px 12px; color: var(--rp-c-text-2); font-size: 12px; font-weight: 700; }
+.man-download-menu a { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 12px; border-radius: 6px; color: var(--rp-c-text-1); font-size: 14px; }
+.man-download-menu a:hover { background: var(--rp-c-bg-soft); }
+.man-download-menu a > span:last-child { color: var(--rp-c-text-2); font-size: 12px; white-space: nowrap; }
+.man-download-menu small { color: var(--rp-c-text-2); }
+.man-download-menu .man-download-history { margin-top: 4px; border-top: 1px solid var(--rp-c-divider); border-radius: 0; color: var(--rp-c-brand); }
+.man-hero-actions a:focus-visible, .man-hero-actions summary:focus-visible { outline: 2px solid var(--rp-c-brand); outline-offset: 3px; }
+@media (max-width: 768px) {
+  .man-hero-actions { flex-direction: column; gap: 1rem; width: 80%; }
+  .man-hero-actions > .rp-button, .man-download-split { width: 100%; }
+  .man-download-primary { flex: 1; justify-content: center; min-width: 0; min-height: 42px; font-size: 14px; }
+  .man-download-dropdown summary { min-height: 42px; }
+}

@@ -1,4 +1,5 @@
-import { Layout as DefaultLayout } from '@rspress/core/theme-original';
+import { Button, HomeLayout as DefaultHomeLayout, Layout as DefaultLayout, type HomeLayoutProps } from '@rspress/core/theme-original';
+import { useEffect, useState } from 'react';
 import startupImage from '../docs/imgs/startup.png';
 import './home.css';
 
@@ -11,6 +12,80 @@ const platforms = [
   { name: 'Linux', description: '模拟器版' },
   { name: 'Android', description: '实机独立运行' },
 ];
+
+type ReleaseAsset = { name: string; size: number; browser_download_url: string };
+type Release = { tag_name: string; published_at: string; assets: ReleaseAsset[] };
+type Platform = 'Windows' | 'macOS' | 'Linux' | 'Android';
+
+const releasePage = 'https://github.com/duorua/narutomobile/releases/latest';
+
+function assetPlatform(name: string): Platform | undefined {
+  if (name.includes('-android-') && name.endsWith('.apk')) return 'Android';
+  if (name.includes('-win-') && name.endsWith('.zip')) return 'Windows';
+  if (name.includes('-macos-') && name.endsWith('.tar.gz')) return 'macOS';
+  if (name.includes('-linux-') && name.endsWith('.tar.gz')) return 'Linux';
+}
+
+function architecture(name: string) {
+  return /aarch64|arm64/i.test(name) ? 'ARM64' : /x86_64|amd64/i.test(name) ? 'x64' : '';
+}
+
+function DownloadSection() {
+  const [release, setRelease] = useState<Release | null>(null);
+  const [platform, setPlatform] = useState<Platform>('Windows');
+
+  useEffect(() => {
+    const ua = navigator.userAgent;
+    if (/Android/i.test(ua)) setPlatform('Android');
+    else if (/Macintosh|Mac OS X/i.test(ua)) setPlatform('macOS');
+    else if (/Linux/i.test(ua)) setPlatform('Linux');
+
+    const controller = new AbortController();
+    fetch('https://api.github.com/repos/duorua/narutomobile/releases/latest', { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error('Release unavailable');
+        return response.json();
+      })
+      .then((data: Release) => setRelease(data))
+      .catch(() => {});
+    return () => controller.abort();
+  }, []);
+
+  const assets = release?.assets.filter((asset) => assetPlatform(asset.name)) ?? [];
+  // Architecture cannot reliably be inferred from the browser; use a common default and expose every build.
+  const preferredArch = platform === 'Android' || platform === 'macOS' ? 'ARM64' : 'x64';
+  const selected = assets.find((asset) => assetPlatform(asset.name) === platform && architecture(asset.name) === preferredArch);
+
+  return (
+    <div className="man-hero-actions">
+          <div className="man-download-split">
+            <a className="man-download-primary" href={selected?.browser_download_url ?? releasePage}>
+              <svg className="man-download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4" /><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" /></svg>
+              <span>{selected ? `下载 ${platform} ${preferredArch}` : '前往 GitHub 下载'}</span>
+              {selected && <small>{(selected.size / 1024 / 1024).toFixed(1)} MB</small>}
+            </a>
+            <details className="man-download-dropdown" onKeyDown={(event) => {
+              if (event.key === 'Escape') {
+                event.currentTarget.open = false;
+                event.currentTarget.querySelector('summary')?.focus();
+              }
+            }}>
+              <summary aria-label="选择其他平台和架构"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary>
+              <div className="man-download-menu">
+                <div className="man-download-menu-title">选择其他版本</div>
+                {assets.length ? assets.map((asset) => <a key={asset.name} href={asset.browser_download_url}>
+                  <span>{assetPlatform(asset.name)} <small>{architecture(asset.name)}</small></span>
+                  <span>{(asset.size / 1024 / 1024).toFixed(1)} MB</span>
+                </a>) : <a href={releasePage}>前往 GitHub 查看所有版本 ↗</a>}
+                <a className="man-download-history" href="https://github.com/duorua/narutomobile/releases">查看历史版本 ↗</a>
+              </div>
+            </details>
+          </div>
+      <Button type="a" theme="alt" href="/guide/">快速开始</Button>
+      <Button type="a" theme="alt" href="https://github.com/duorua/narutomobile">GitHub</Button>
+    </div>
+  );
+}
 
 function HomeSections() {
   return (
@@ -73,6 +148,10 @@ function HomeSections() {
   );
 }
 
+function HomeLayout(props: HomeLayoutProps) {
+  return <DefaultHomeLayout {...props} beforeHeroActions={<DownloadSection />} />;
+}
+
 export function Layout() {
-  return <DefaultLayout afterFeatures={<HomeSections />} />;
+  return <DefaultLayout HomeLayout={HomeLayout} afterFeatures={<HomeSections />} />;
 }
