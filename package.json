@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "rspress build",
+    "build": "node scripts/fetch-release.mjs && rspress build",
     "check": "biome check --write",
-    "dev": "rspress dev",
+    "dev": "node scripts/fetch-release.mjs && rspress dev",
     "format": "biome format --write",
     "preview": "rspress preview",
     "sync:docs": "node scripts/sync-docs.mjs"

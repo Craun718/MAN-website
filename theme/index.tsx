@@ -2,6 +2,7 @@ import { Button, HomeLayout as DefaultHomeLayout, Layout as DefaultLayout, type 
 import { useEffect, useState } from 'react';
 import panelImage from '../docs/imgs/panel.png';
 import scheduledImage from '../docs/imgs/scheduled.png';
+import release from '../.generated/release-data.json';
 import './home.css';
 
 export * from '@rspress/core/theme-original';
@@ -15,26 +16,8 @@ const platforms = [
 ];
 
 type ReleaseAsset = { name: string; size?: number; browser_download_url: string };
-type Release = { tag_name: string; published_at: string; assets: ReleaseAsset[] };
 type Platform = 'Windows' | 'macOS' | 'Linux' | 'Android';
 
-const releasePage = 'https://github.com/duorua/narutomobile/releases/latest';
-// Keep a known release available when the GitHub API is slow or unreachable.
-const fallbackTag = 'v1.4.8';
-const fallbackAssets: ReleaseAsset[] = [
-  'android-public-release-amd64',
-  'android-public-release-arm64',
-  'linux-aarch64',
-  'linux-x86_64',
-  'macos-aarch64',
-  'macos-x86_64',
-  'win-aarch64',
-  'win-x86_64',
-].map((build) => {
-  const extension = build.startsWith('android') ? 'apk' : build.startsWith('win') ? 'zip' : 'tar.gz';
-  const name = `MaaAutoNaruto-${build}-${fallbackTag}.${extension}`;
-  return { name, browser_download_url: `https://github.com/duorua/narutomobile/releases/download/${fallbackTag}/${name}` };
-});
 
 function assetPlatform(name: string): Platform | undefined {
   if (name.includes('-android-') && name.endsWith('.apk')) return 'Android';
@@ -48,7 +31,6 @@ function architecture(name: string) {
 }
 
 function DownloadSection() {
-  const [release, setRelease] = useState<Release | null>(null);
   const [platform, setPlatform] = useState<Platform>('Windows');
 
   useEffect(() => {
@@ -57,32 +39,21 @@ function DownloadSection() {
     else if (/Macintosh|Mac OS X/i.test(ua)) setPlatform('macOS');
     else if (/Linux/i.test(ua)) setPlatform('Linux');
 
-    const controller = new AbortController();
-    fetch('https://api.github.com/repos/duorua/narutomobile/releases/latest', { signal: controller.signal })
-      .then((response) => {
-        if (!response.ok) throw new Error('Release unavailable');
-        return response.json();
-      })
-      .then((data: Release) => setRelease(data))
-      .catch(() => {});
-    return () => controller.abort();
   }, []);
 
-  const latestAssets = release?.assets.filter((asset) => assetPlatform(asset.name)) ?? [];
-  const assets = latestAssets.length ? latestAssets : fallbackAssets;
+  const assets: ReleaseAsset[] = release.assets.filter((asset) => assetPlatform(asset.name));
   // Architecture cannot reliably be inferred from the browser; use a common default and expose every build.
   const preferredArch = platform === 'Android' || platform === 'macOS' ? 'ARM64' : 'x64';
   const selected = assets.find((asset) => assetPlatform(asset.name) === platform && architecture(asset.name) === preferredArch)
-    ?? fallbackAssets.find((asset) => assetPlatform(asset.name) === platform && architecture(asset.name) === preferredArch);
+    ?? assets.find((asset) => assetPlatform(asset.name) === platform);
 
   return (
     <div className="man-hero-actions">
           <div className="man-download-split">
-            <a className="man-download-primary" href={selected?.browser_download_url ?? releasePage}>
+            <a className="man-download-primary" href={selected?.browser_download_url} aria-disabled={!selected}>
               <svg className="man-download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4" /><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" /></svg>
-              <span>{selected ? `下载 ${platform} ${preferredArch}` : '前往 GitHub 下载'}</span>
+              <span>{selected ? `下载 ${platform} ${architecture(selected.name)}` : `${platform} 暂无下载`}</span>
               {selected?.size != null && <small>{(selected.size / 1024 / 1024).toFixed(1)} MB</small>}
-              {selected && fallbackAssets.includes(selected) && <small>{fallbackTag}</small>}
             </a>
             <details className="man-download-dropdown" onKeyDown={(event) => {
               if (event.key === 'Escape') {
@@ -94,9 +65,9 @@ function DownloadSection() {
               <div className="man-download-menu">
                 <div className="man-download-menu-title">选择其他版本</div>
                 {assets.length ? assets.map((asset) => <a key={asset.name} href={asset.browser_download_url}>
-                  <span>{assetPlatform(asset.name)} <small>{architecture(asset.name)}{fallbackAssets.includes(asset) ? ` · ${fallbackTag}` : ''}</small></span>
+                  <span>{assetPlatform(asset.name)} <small>{architecture(asset.name)}</small></span>
                   {asset.size != null && <span>{(asset.size / 1024 / 1024).toFixed(1)} MB</span>}
-                </a>) : <a href={releasePage}>前往 GitHub 查看所有版本 ↗</a>}
+                </a>) : <span>暂无可用版本</span>}
                 <a className="man-download-history" href="https://github.com/duorua/narutomobile/releases">查看历史版本 ↗</a>
               </div>
             </details>
